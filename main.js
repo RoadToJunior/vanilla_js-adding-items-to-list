@@ -1,24 +1,24 @@
 const form = document.querySelector("form");
 const input = document.querySelector("input");
-const button = document.querySelector("button");
 const ul = document.querySelector("ul");
-const removeTaskButton = document.querySelector(".removeTaskBtn");
-let number = 0;
+const listItems = document.getElementsByClassName("task");
+const taskNumber = document.querySelector("h1 span");
 
 const addTask = (e) => {
   e.preventDefault();
-  number++;
-  const task = input.value;
-  console.log(task);
-  const li = document.createElement("li");
-  ul.appendChild(
-    li
-  ).innerHTML = `${task} <button data-key="${number}">X</button>`;
+  const titleTask = input.value;
+  if (titleTask.trim() === "") return;
+  const task = document.createElement("li");
+  task.className = "task";
+  task.innerHTML = `${titleTask} <button>X</button>`;
+  ul.appendChild(task);
+  taskNumber.textContent = listItems.length;
+  task.addEventListener("click", removeTask);
 };
 
 const removeTask = (e) => {
-  e.target.remove();
+  e.target.parentNode.remove();
+  taskNumber.textContent = listItems.length;
 };
 
-removeTaskButton.addEventListener("click", removeTask);
 form.addEventListener("submit", addTask);
