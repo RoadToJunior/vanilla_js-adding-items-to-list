@@ -17,6 +17,7 @@ const addTask = (e) => {
 };
 
 const removeTask = (e) => {
+  //e.target.parentNode.style.textDecoration = "line-through";
   e.target.parentNode.remove();
   taskNumber.textContent = listItems.length;
 };
